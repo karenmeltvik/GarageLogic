@@ -9,41 +9,31 @@ namespace B18_Ex03
     public class Wheel
     {
         private string m_ManufacturerName;
-        public string ManufacturerName
-        {
-            get { return m_ManufacturerName; }
-        }
+        public string ManufacturerName { get; set; }
 
         private float m_CurrentAirPressure;
-        public float CurrentAirPressure
-        {
-            get { return m_CurrentAirPressure; }
-        }
+        public float CurrentAirPressure { get; set; }
 
         private float m_MaxAirPrRecommended;
-        public float MaxAirPr
-        {
-            get { return m_MaxAirPrRecommended; }
-        }
+        public float MaxAirPressure { get; set; }
 
 
         public Wheel(string i_manufacturerName, float i_currentAirPressure, float i_maxAirPrRecommended)
         {
-            this.m_ManufacturerName = i_manufacturerName;
-            this.m_CurrentAirPressure = i_currentAirPressure;
-            this.m_MaxAirPrRecommended = i_maxAirPrRecommended;
-
-
+            ManufacturerName = i_manufacturerName;
+            CurrentAirPressure = i_currentAirPressure;
+            MaxAirPressure = i_maxAirPrRecommended;
         }
+
         public void InflateAction(float i_airToAdd)
         {
-            if (m_CurrentAirPressure + i_airToAdd <= m_MaxAirPrRecommended)
+            if (CurrentAirPressure + i_airToAdd <= MaxAirPressure)
             {
-                this.m_CurrentAirPressure += i_airToAdd;
+                CurrentAirPressure += i_airToAdd;
             }
             else
             {
-                throw new ArgumentException("More air than the maximum possible");
+                throw new ValueOutOfRangeException(0, MaxAirPressure);
             }
         }
     }

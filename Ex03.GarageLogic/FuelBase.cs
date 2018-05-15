@@ -17,8 +17,9 @@ namespace B18_Ex03
 
         }
 
-        public void Refuel(float i_toAdd)
+        public void Refuel(float i_toAdd, eFuelType i_fuelType)
         {
+            if (i_fuelType != m_FuelType) throw new ArgumentException("Wrong type of fuel");
             RefillEnergy(i_toAdd);
         }
     }
