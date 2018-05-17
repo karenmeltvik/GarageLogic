@@ -10,7 +10,7 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            
+            Console.WriteLine("Welcome to the garage. There are currently no vehicles. What would you like to do?");
         }
     }
 }

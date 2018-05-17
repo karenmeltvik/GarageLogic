@@ -21,15 +21,15 @@ namespace Ex03.GarageLogic
         public Wheel(string i_manufacturerName, float i_currentAirPressure, float i_maxAirPrRecommended)
         {
             ManufacturerName = i_manufacturerName;
-            CurrentAirPressure = i_currentAirPressure;
+            m_CurrentAirPressure = i_currentAirPressure;
             MaxAirPressure = i_maxAirPrRecommended;
         }
 
         public void InflateAction(float i_airToAdd)
         {
-            if (CurrentAirPressure + i_airToAdd <= MaxAirPressure)
+            if (m_CurrentAirPressure + i_airToAdd <= MaxAirPressure)
             {
-                CurrentAirPressure += i_airToAdd;
+                m_CurrentAirPressure += i_airToAdd;
             }
             else
             {

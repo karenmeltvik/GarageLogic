@@ -16,13 +16,13 @@ namespace Ex03.GarageLogic
 
         public EnergySystem(float i_maxAmountOfEnergy)
         {
-            MaxAmountOfEnergy = i_maxAmountOfEnergy;
+            m_MaxAmountOfEnergy = i_maxAmountOfEnergy;
         }
 
         public void RefillEnergy(float i_refillAmount)
         {
             if (i_refillAmount + CurrentAmountOfEnergy > MaxAmountOfEnergy) { throw new ValueOutOfRangeException(0, MaxAmountOfEnergy); }
-            CurrentAmountOfEnergy += i_refillAmount;
+            m_CurrentAmountOfEnergy += i_refillAmount;
         }
     }
 }

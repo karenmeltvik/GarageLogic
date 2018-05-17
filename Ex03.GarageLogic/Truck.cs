@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : Vehicle
+    public class Truck : Vehicle
     {
         private bool m_IsCooled;
         private float m_CargoVolume;
         public float CargoVolume { get; set; }
 
-        public Truck(string i_modelName, string i_licenseNumber, float i_remainingEnergyPercentage, float i_cargoVolume)
-            : base(i_modelName, i_licenseNumber, i_remainingEnergyPercentage)
+        public Truck(string i_ModelName, string i_LicenseNumber, string i_OwnerName,
+                     string i_OwnerPhoneNumber, List<Wheel> i_wheels, bool i_IsCooled, float i_CargoVolume)
+            : base(i_ModelName, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_wheels)
         {
-            CargoVolume = i_cargoVolume;
+            m_IsCooled = i_IsCooled;
+            m_CargoVolume = i_CargoVolume;
         }
     }
 }
