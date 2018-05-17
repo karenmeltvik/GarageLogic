@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace Ex03.GarageLogic
 {
     public class ElectricBase : EnergySystem
     {
-        public ElectricBase()
+        public ElectricBase(float i_maxAmountOfEnergy) : base(i_maxAmountOfEnergy)
         {
 
         }
 
-        public void Recharge(float i_toAdd)
+        public void Recharge(float i_hoursToAdd)
         {
-            RefillEnergy(i_toAdd);
+            RefillEnergy(i_hoursToAdd);
         }
     }
 }

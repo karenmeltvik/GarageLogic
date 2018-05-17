@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace Ex03.GarageLogic
 {
     public class EnergySystem
     {
         private float m_CurrentAmountOfEnergy;
+        public float CurrentAmountOfEnergy { get; set; }
+
         private float m_MaxAmountOfEnergy;
+        public float MaxAmountOfEnergy { get; set; }
 
-        public EnergySystem()
+        public EnergySystem(float i_maxAmountOfEnergy)
         {
-
+            MaxAmountOfEnergy = i_maxAmountOfEnergy;
         }
 
         public void RefillEnergy(float i_refillAmount)
         {
-            if (i_refillAmount + m_CurrentAmountOfEnergy > m_MaxAmountOfEnergy) { throw new ValueOutOfRangeException(0, m_MaxAmountOfEnergy); }
-            m_CurrentAmountOfEnergy += i_refillAmount;
+            if (i_refillAmount + CurrentAmountOfEnergy > MaxAmountOfEnergy) { throw new ValueOutOfRangeException(0, MaxAmountOfEnergy); }
+            CurrentAmountOfEnergy += i_refillAmount;
         }
     }
 }

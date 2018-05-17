@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace Ex03.GarageLogic
 {
     class FuelBase : EnergySystem
     {
         public enum eFuelType { Solar, Octane95, Octane96, Octane98 }
         private eFuelType m_FuelType;
+        public eFuelType FuelType { get; set; }
         private Vehicle m_Vehicle;
 
-        public FuelBase()
+        public FuelBase(float i_maxAmountOfEnergy, eFuelType i_fuelType) : base(i_maxAmountOfEnergy)
         {
-
+            FuelType = i_fuelType;
         }
 
-        public void Refuel(float i_toAdd, eFuelType i_fuelType)
+        public void Refuel(float i_litersToAdd, eFuelType i_fuelType)
         {
-            if (i_fuelType != m_FuelType) throw new ArgumentException("Wrong type of fuel");
-            RefillEnergy(i_toAdd);
+            if (i_fuelType != FuelType) throw new ArgumentException("Wrong type of fuel");
+            RefillEnergy(i_litersToAdd);
         }
     }
 }

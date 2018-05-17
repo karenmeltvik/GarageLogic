@@ -14,7 +14,15 @@ namespace Ex03.GarageLogic
         private string m_OwnerPhoneNumber;
         public string OwnerPhoneNumber { get; set; }
 
-        public enum VehicleStatus { InRepair, Repaired, PaidFor } // how to set this enum to InRepair when adding to garage??
-        public VehicleStatus m_Status;
+        public enum VehicleStatus { InRepair, Repaired, PaidFor }
+        private VehicleStatus m_Status;
+        public VehicleStatus Status { get; set; }
+
+        private Vehicle m_Vehicle;
+
+        public Garage() //In progress
+        {
+            Status = VehicleStatus.InRepair;
+        }
     }
 }
