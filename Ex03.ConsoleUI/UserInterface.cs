@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
@@ -11,21 +10,25 @@ namespace Ex03.ConsoleUI
 
         public enum eVehicleTypes { Car, Motorcycle, Truck }
 
-        private static GarageLogic.Garage m_Garage;
+        private static readonly Garage sr_Garage = new Garage();
 
         public static void Main()
         {
             Console.WriteLine("Welcome to the garage. There are currently no vehicles.");
-            Menu();
             int command;
+            Menu();
             bool isRead = Int32.TryParse(Console.ReadLine(), out command);
-            while (!isRead)
-            {
-                Console.WriteLine("Please try again, write a number");
+            while (command != 8) {
+                while (!isRead)
+                {
+                    Console.WriteLine("Please try again, write a number");
+                    isRead = Int32.TryParse(Console.ReadLine(), out command);
+                }
+                if (command == 8) return;
+                ParseCommand(command);
+                Menu();
                 isRead = Int32.TryParse(Console.ReadLine(), out command);
             }
-            if (command == 8) return;
-            m_Garage = new GarageLogic.Garage();
         }
 
         public static void Menu()
@@ -64,7 +67,7 @@ namespace Ex03.ConsoleUI
                     Charge();
                     break;
                 case 7:
-                    //
+                    DisplayInfo();
                     break;
                 default:
                     Console.WriteLine("Try a number from 1 to 8.");
@@ -89,19 +92,19 @@ namespace Ex03.ConsoleUI
                     //find way to iterate through types without duplicating code
                 }
             }
-            //GarageLogic.Car()
+            //Car()
         }
 
         public static void ListLicenseNumbers()
         {
-            m_Garage.DisplayAllLicenseNbrs();
+            sr_Garage.DisplayAllLicenseNbrs();
         }
 
         private static void PromptForLicenseNumber(out string i_licenseNumber)
         {
             Console.WriteLine("Please write the license number of the vehicle:");
             i_licenseNumber = Console.ReadLine();
-            while (!m_Garage.Contains(i_licenseNumber))
+            while (!sr_Garage.Contains(i_licenseNumber))
             {
                 Console.WriteLine("Please write the license number of a vehicle in the garage.");
                 i_licenseNumber = Console.ReadLine();
@@ -115,14 +118,14 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine("Please write the new status of the vehicle:");
             string status = Console.ReadLine();
-            GarageLogic.eStatus newStatus;
+            eStatus newStatus;
             bool isStatus = Enum.TryParse(status, out newStatus);
             while (!isStatus)
             {
                 Console.WriteLine("Please write the new status of the vehicle: either InRepair, Repaired or PayedFor");
                 isStatus = Enum.TryParse(status, out newStatus);
             }
-            m_Garage.ChangeStatus(licenseNumber, newStatus);
+            sr_Garage.ChangeStatus(licenseNumber, newStatus);
             Console.WriteLine("The new status of " + licenseNumber + ": " + newStatus);
         }
 
@@ -130,7 +133,7 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber;
             PromptForLicenseNumber(out licenseNumber);
-            m_Garage.InflatesTiresToMax(licenseNumber);
+            sr_Garage.InflatesTiresToMax(licenseNumber);
             Console.WriteLine("Tires inflated to maximum!");
         }
 
@@ -138,14 +141,14 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber;
             PromptForLicenseNumber(out licenseNumber);
-            GarageLogic.Vehicle vehicle = m_Garage.FindVehicle(licenseNumber);
+            Vehicle vehicle = sr_Garage.FindVehicle(licenseNumber);
             while (!(vehicle.EnergySystem is GarageLogic.FuelBase))
             {
                 Console.WriteLine("This vehicle is not fuel-driven, try another:");
                 PromptForLicenseNumber(out licenseNumber);
-                vehicle = m_Garage.FindVehicle(licenseNumber);
+                vehicle = sr_Garage.FindVehicle(licenseNumber);
             }
-            GarageLogic.eFuelType fuelType;
+            eFuelType fuelType;
             GetFuelType(out fuelType);
             float amountOfFuel;
             GetRefillAmount(out amountOfFuel);
@@ -156,12 +159,12 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber;
             PromptForLicenseNumber(out licenseNumber);
-            GarageLogic.Vehicle vehicle = m_Garage.FindVehicle(licenseNumber);
+            Vehicle vehicle = sr_Garage.FindVehicle(licenseNumber);
             while (!(vehicle.EnergySystem is GarageLogic.ElectricBase))
             {
                 Console.WriteLine("This vehicle is not electric, try another:");
                 PromptForLicenseNumber(out licenseNumber);
-                vehicle = m_Garage.FindVehicle(licenseNumber);
+                vehicle = sr_Garage.FindVehicle(licenseNumber);
             }
             float amountToCharge;
             GetRefillAmount(out amountToCharge);
@@ -193,6 +196,10 @@ namespace Ex03.ConsoleUI
             }
         }
 
-
+        public static void DisplayInfo()
+        {
+            PromptForLicenseNumber(out string licenseNumber);
+            sr_Garage.DisplayVehicleInformation(licenseNumber);
+        }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -22,8 +19,7 @@ namespace Ex03.GarageLogic
 
         public Vehicle FindVehicle(string i_licenseNumber)
         {
-            Vehicle vehicle;
-            bool isVehicle = m_Garage.TryGetValue(i_licenseNumber, out vehicle);
+            bool isVehicle = m_Garage.TryGetValue(i_licenseNumber, out Vehicle vehicle);
             if (isVehicle) return vehicle;
             return null;
         }
@@ -38,7 +34,7 @@ namespace Ex03.GarageLogic
             {
                 if (!m_Garage.ContainsKey(i_LicenseNumber))
                 {
-                    //throw new VehicleNotFoundException(i_LicenseNumber);
+                    throw new VehicleNotFoundException(i_LicenseNumber);
                 }
                 else
                 {
@@ -51,7 +47,7 @@ namespace Ex03.GarageLogic
         {
             if (!m_Garage.ContainsKey(i_LicenseNumber))
             {
-                //throw new VehicleNotFoundException(i_LicenceNumber);
+                throw new VehicleNotFoundException(i_LicenseNumber);
             }
             else
             {
@@ -64,7 +60,7 @@ namespace Ex03.GarageLogic
         {
             if (!m_Garage.ContainsKey(i_LicenseNumber))
             {
-                //throw new VehicleNotFoundException(i_LicenceNumber);
+                throw new VehicleNotFoundException(i_LicenseNumber);
             }
             else
             {
@@ -88,9 +84,11 @@ namespace Ex03.GarageLogic
         }
 
 
-        public void RefuelVehicle(string i_LicenseNumber, float i_AmoutToFill)
+        public void RefuelVehicle(string i_LicenseNumber, float i_AmountToFill, eFuelType i_fuelType)
         {
-            //TODO
+            Vehicle vehicle = FindVehicle(i_LicenseNumber);
+            FuelBase fuelBase = (FuelBase) vehicle.EnergySystem;
+            fuelBase.Refuel(i_AmountToFill, i_fuelType);
         }
     }
 }

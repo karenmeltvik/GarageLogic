@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BC66A58C-E538-4E87-80C1-681919F6062F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Ex03.GarageLogic</RootNamespace>
     <AssemblyName>Ex03.GarageLogic</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -44,10 +44,10 @@
     <Compile Include="FuelBase.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="Motorcycle.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="VehicleNotFoundException.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
