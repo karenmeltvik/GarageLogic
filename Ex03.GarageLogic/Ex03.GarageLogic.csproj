@@ -49,6 +49,7 @@
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleNotFoundException.cs" />
     <Compile Include="Wheel.cs" />
+    <Compile Include="WrongFuelTypeException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

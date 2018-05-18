@@ -31,6 +31,11 @@ namespace Ex03.GarageLogic
             }
         }
         protected float m_RemainingEnergyPercentage;
+        public float RemainingEnergyPercentage
+        {
+            get { return m_RemainingEnergyPercentage; }
+            set { m_RemainingEnergyPercentage = value; }
+        }
         protected List<Wheel> m_Wheels;
         public List<Wheel> Wheels { get { return m_Wheels; } }
         protected string m_OwnerName;
@@ -71,10 +76,9 @@ namespace Ex03.GarageLogic
             informations.AppendLine("Model Name : " + this.m_ModelName);
             informations.AppendLine("Owner Name : " + this.m_OwnerName);
             informations.AppendLine("Status : " + this.m_Status);
-            int i = 1;
             if (EnergySystem is FuelBase)
             {
-                FuelBase fuelBase = (FuelBase) EnergySystem;
+                FuelBase fuelBase = (FuelBase)EnergySystem;
                 informations.AppendLine("Fuel type: " + fuelBase.FuelType);
                 informations.AppendLine("Remaining fuel percentage: " + m_RemainingEnergyPercentage);
             }
@@ -86,12 +90,14 @@ namespace Ex03.GarageLogic
             {
                 informations.AppendLine("Remaining energy percentage: " + m_RemainingEnergyPercentage);
             }
+            int i = 1;
             foreach (Wheel wheel in m_Wheels)
             {
                 informations.AppendLine("Manufacturer Name of wheel " + i + " : " + wheel.ManufacturerName);
                 informations.AppendLine("Air pressure of wheel " + i + " : " + wheel.CurrentAirPressure);
                 i++;
             }
+            informations.AppendLine(this.ToString());
             Console.WriteLine(informations);
         }
 

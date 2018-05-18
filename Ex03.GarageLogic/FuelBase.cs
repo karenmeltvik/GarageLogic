@@ -13,11 +13,5 @@ namespace Ex03.GarageLogic
         {
             m_FuelType = i_fuelType;
         }
-
-        public void Refuel(float i_litersToAdd, eFuelType i_fuelType)
-        {
-            if (i_fuelType != FuelType) throw new ArgumentException("Wrong type of fuel");
-            RefillEnergy(i_litersToAdd);
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -16,6 +17,15 @@ namespace Ex03.GarageLogic
             m_IsCooled = i_IsCooled;
             m_CargoVolume = i_CargoVolume;
             EnergySystem = new FuelBase(EnergySystem.MaxAmountOfEnergy, eFuelType.Solar); // set somehow
+        }
+
+        public override string ToString()
+        {
+            StringBuilder infoOfTruck = new StringBuilder();
+            infoOfTruck.AppendLine("Type of vehicle : Truck");
+            infoOfTruck.AppendLine("Truck i cooled? : " + m_IsCooled);
+            infoOfTruck.AppendLine("The volume of the cargo is: " + m_CargoVolume);
+            return infoOfTruck.ToString();
         }
     }
 }

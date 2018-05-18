@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -19,6 +20,15 @@ namespace Ex03.GarageLogic
         {
             m_CarColor = i_CarColor;
             m_NumOfDoors = i_NumOfDoors;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder infoOfCar = new StringBuilder();
+            infoOfCar.AppendLine("Type of vehicle : Car");
+            infoOfCar.AppendLine("Color of the car : " + m_CarColor.ToString());
+            infoOfCar.AppendLine("Number of doors : " + m_NumOfDoors.ToString());
+            return infoOfCar.ToString();
         }
     }
 }

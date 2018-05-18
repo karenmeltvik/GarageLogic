@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -70,17 +71,43 @@ namespace Ex03.GarageLogic
                 }
             }
         }
+
         public void DisplayAllLicenseNbrs()
         {
+            StringBuilder inRepairLicences = new StringBuilder();
+            inRepairLicences.AppendLine("Vehicles in Repair : ");
+            StringBuilder paidForLicences = new StringBuilder();
+            paidForLicences.AppendLine("Paid Vehicles: ");
+            StringBuilder reparedLicences = new StringBuilder();
+            reparedLicences.AppendLine("Repared Vehicles : ");
+
             foreach (KeyValuePair<string, Vehicle> vehicles in m_Garage)
             {
-                Console.WriteLine(vehicles.Key);
+                if (vehicles.Value.Status == eStatus.InRepair)
+                {
+                    inRepairLicences.AppendLine(vehicles.Key);
+                }
+                else if (vehicles.Value.Status == eStatus.PayedFor)
+                {
+                    paidForLicences.AppendLine(vehicles.Key);
+                }
+                else if (vehicles.Value.Status == eStatus.Repaired)
+                {
+                    reparedLicences.AppendLine(vehicles.Key);
+                }
+
             }
+            Console.WriteLine(inRepairLicences);
+            Console.WriteLine(paidForLicences);
+            Console.WriteLine(reparedLicences);
         }
 
-        public void ChargeElectricVehicle(string i_LicenseNumber, float i_NumberOfMinutes)
+        public void ChargeElectricVehicle(string i_LicenseNumber, float i_HoursToAdd)
         {
-            //TODO
+            Vehicle vehicle = FindVehicle(i_LicenseNumber);
+            ElectricBase electricBase = (ElectricBase)vehicle.EnergySystem;
+            electricBase.RefillEnergy(i_HoursToAdd);
+            vehicle.RemainingEnergyPercentage = (electricBase.CurrentAmountOfEnergy / electricBase.MaxAmountOfEnergy) * 100;
         }
 
 
@@ -88,7 +115,10 @@ namespace Ex03.GarageLogic
         {
             Vehicle vehicle = FindVehicle(i_LicenseNumber);
             FuelBase fuelBase = (FuelBase) vehicle.EnergySystem;
-            fuelBase.Refuel(i_AmountToFill, i_fuelType);
+            eFuelType fuelType = fuelBase.FuelType;
+            if (i_fuelType != fuelType) throw new ArgumentException("Wrong type of fuel");
+            fuelBase.RefillEnergy(i_AmountToFill);
+            vehicle.RemainingEnergyPercentage = (fuelBase.CurrentAmountOfEnergy / fuelBase.MaxAmountOfEnergy) * 100;
         }
     }
 }

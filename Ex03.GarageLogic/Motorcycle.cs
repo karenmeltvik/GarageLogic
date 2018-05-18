@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
@@ -18,6 +19,15 @@ namespace Ex03.GarageLogic
         {
             m_LicenseType = i_licenseType;
             m_EngineVolume = i_engineVolume;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder infoOfMotorcycle = new StringBuilder();
+            infoOfMotorcycle.AppendLine("Type of vehicle : Motorcycle");
+            infoOfMotorcycle.AppendLine("Licence Type " + m_LicenseType.ToString());
+            infoOfMotorcycle.AppendLine("The volume of the engine is: " + m_EngineVolume);
+            return infoOfMotorcycle.ToString();
         }
     }
 }

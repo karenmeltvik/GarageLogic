@@ -142,7 +142,7 @@ namespace Ex03.ConsoleUI
             string licenseNumber;
             PromptForLicenseNumber(out licenseNumber);
             Vehicle vehicle = sr_Garage.FindVehicle(licenseNumber);
-            while (!(vehicle.EnergySystem is GarageLogic.FuelBase))
+            while (!(vehicle.EnergySystem is FuelBase))
             {
                 Console.WriteLine("This vehicle is not fuel-driven, try another:");
                 PromptForLicenseNumber(out licenseNumber);
@@ -152,7 +152,7 @@ namespace Ex03.ConsoleUI
             GetFuelType(out fuelType);
             float amountOfFuel;
             GetRefillAmount(out amountOfFuel);
-            vehicle.EnergySystem.RefillEnergy(amountOfFuel);
+            sr_Garage.RefuelVehicle(licenseNumber, amountOfFuel, fuelType);
         }
         
         public static void Charge() //maybe merge with Refuel because they do the same thing just with different types
@@ -160,7 +160,7 @@ namespace Ex03.ConsoleUI
             string licenseNumber;
             PromptForLicenseNumber(out licenseNumber);
             Vehicle vehicle = sr_Garage.FindVehicle(licenseNumber);
-            while (!(vehicle.EnergySystem is GarageLogic.ElectricBase))
+            while (!(vehicle.EnergySystem is ElectricBase))
             {
                 Console.WriteLine("This vehicle is not electric, try another:");
                 PromptForLicenseNumber(out licenseNumber);
@@ -171,7 +171,7 @@ namespace Ex03.ConsoleUI
             vehicle.EnergySystem.RefillEnergy(amountToCharge);
         }
 
-        private static void GetFuelType(out GarageLogic.eFuelType i_fuelType)
+        private static void GetFuelType(out eFuelType i_fuelType)
         {
             Console.WriteLine("Which fuel type do you want to use?");
             string fuel = Console.ReadLine();
