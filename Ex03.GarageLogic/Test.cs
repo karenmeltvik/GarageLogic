@@ -17,13 +17,15 @@ namespace Ex03.GarageLogic
             List<Wheel> wheels = new List<Wheel>();
             wheels.Add(a);
             wheels.Add(b);
-            FuelBase fueled = new FuelBase(25, eFuelType.Octane96);
+            FuelBase fueled = new FuelBase(205, eFuelType.Octane96);
+            Truck truck = new Truck("Volvo", "3232", "Karen", "05722451", wheels, true, 2000, fueled);
             Car car = new Car("Hyundai", "3333333", "Karen", "0847372", wheels, eColor.Blue, eNumOfDoors.Two, fueled);
-            Motorcycle jaja = new Motorcycle("suzuki", "343", "jonas", "0537085642", wheels, Motorcycle.eLicenseType.B1, 130);
+            Motorcycle jaja = new Motorcycle("suzuki", "343", "jonas", "0537085642", wheels, Motorcycle.eLicenseType.B1, 130, fueled);
             m_Garage.Insert(car);
             m_Garage.Insert(jaja);
-            m_Garage.DisplayVehicleInformation("343");
-            m_Garage.DisplayVehicleInformation(car.LicenseNumber);
+            m_Garage.Insert(truck);
+            truck.Wheels.First().InflateAction(20);
+            m_Garage.DisplayVehicleInformation(truck.LicenseNumber);
         }
     }
 }

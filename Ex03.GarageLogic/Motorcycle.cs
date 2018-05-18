@@ -16,8 +16,8 @@ namespace Ex03.GarageLogic
         public int EngineVolume { get; set; }
 
         public Motorcycle(string i_ModelName, string i_LicenseNumber, string i_OwnerName,
-                          string i_OwnerPhoneNumber, List<Wheel> i_wheels, eLicenseType i_licenseType, int i_engineVolume)
-            : base(i_ModelName, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_wheels)
+                          string i_OwnerPhoneNumber, List<Wheel> i_wheels, eLicenseType i_licenseType, int i_engineVolume, EnergySystem i_energySystem)
+            : base(i_ModelName, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_wheels, i_energySystem)
         {
             m_LicenseType = i_licenseType;
             m_EngineVolume = i_engineVolume;

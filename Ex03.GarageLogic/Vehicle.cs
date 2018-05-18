@@ -34,11 +34,21 @@ namespace Ex03.GarageLogic
         }
         protected float m_RemainingEnergyPercentage;
         protected List<Wheel> m_Wheels;
-        public List<Wheel> Wheels { get; }
+        public List<Wheel> Wheels { get { return m_Wheels; } }
         protected string m_OwnerName;
         protected string m_OwnerPhoneNumber;
         protected eStatus m_Status = eStatus.InRepair;
-        public eStatus Status { get; set; }
+        public eStatus Status
+        {
+            get
+            {
+                return m_Status;
+            }
+            set
+            {
+                m_Status = value;
+            }
+        }
         protected EnergySystem m_EnergySystem;
         public EnergySystem EnergySystem
         {
@@ -46,13 +56,14 @@ namespace Ex03.GarageLogic
             set { m_EnergySystem = value; }
         }
 
-        public Vehicle(string i_ModelName, string i_LicenseNumber, string i_Owner, string i_OwnerPhoneNumber, List<Wheel> i_wheels)
+        public Vehicle(string i_ModelName, string i_LicenseNumber, string i_Owner, string i_OwnerPhoneNumber, List<Wheel> i_wheels, EnergySystem i_energySystem)
         {
             m_LicenseNumber = i_LicenseNumber;
             m_ModelName = i_ModelName;
             m_OwnerName = i_Owner;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
             m_Wheels = i_wheels;
+            EnergySystem = i_energySystem;
         }
 
         public void DisplayInformation()
@@ -63,13 +74,13 @@ namespace Ex03.GarageLogic
             informations.AppendLine("Owner Name : " + this.m_OwnerName);
             informations.AppendLine("Status : " + this.m_Status);
             int i = 1;
-            if ((this is Car || this is Motorcycle) && this.EnergySystem is FuelBase)
+            if (EnergySystem is FuelBase)
             {
                 FuelBase fuelBase = (FuelBase) EnergySystem;
                 informations.AppendLine("Fuel type: " + fuelBase.FuelType);
                 informations.AppendLine("Remaining fuel percentage: " + m_RemainingEnergyPercentage);
             }
-            else if ((this is Car || this is Motorcycle) && this.EnergySystem is ElectricBase)
+            else if (EnergySystem is ElectricBase)
             {
                 informations.AppendLine("Remaining battery percentage: " + m_RemainingEnergyPercentage);
             }
@@ -84,8 +95,14 @@ namespace Ex03.GarageLogic
                 i++;
             }
             Console.WriteLine(informations);
+        }
 
-
+        public void Refuel(float i_amountOfFuel, eFuelType i_fuelType)
+        {
+            if (EnergySystem is FuelBase)
+            {
+                EnergySystem.RefillEnergy(i_amountOfFuel);
+            }
         }
     }
 

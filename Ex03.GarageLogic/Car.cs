@@ -15,15 +15,13 @@ namespace Ex03.GarageLogic
         public eColor CarColor { get; set; }
         private eNumOfDoors m_NumOfDoors;
         public eNumOfDoors NumOfDoors { get; set; }
-        private EnergySystem m_EnergySystem;
 
         public Car(string i_ModelName, string i_LicenseNumber, string i_OwnerName,
                    string i_OwnerPhoneNumber, List<Wheel> i_wheels, eColor i_CarColor, eNumOfDoors i_NumOfDoors, EnergySystem i_energySystem)
-            : base(i_ModelName, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_wheels)
+            : base(i_ModelName, i_LicenseNumber, i_OwnerName, i_OwnerPhoneNumber, i_wheels, i_energySystem)
         {
             m_CarColor = i_CarColor;
             m_NumOfDoors = i_NumOfDoors;
-            m_EnergySystem = i_energySystem;
         }
     }
 }

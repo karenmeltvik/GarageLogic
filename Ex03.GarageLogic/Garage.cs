@@ -20,6 +20,14 @@ namespace Ex03.GarageLogic
             return m_Garage.ContainsKey(i_LicenseNumber);
         }
 
+        public Vehicle FindVehicle(string i_licenseNumber)
+        {
+            Vehicle vehicle;
+            bool isVehicle = m_Garage.TryGetValue(i_licenseNumber, out vehicle);
+            if (isVehicle) return vehicle;
+            return null;
+        }
+
         public void Insert(Vehicle i_VehicleToInsert)
         {
             m_Garage.Add(i_VehicleToInsert.LicenseNumber, i_VehicleToInsert);
